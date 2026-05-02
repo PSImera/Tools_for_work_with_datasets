@@ -79,10 +79,10 @@ class TextAnnotatorApp:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    root.title("Text annorator for images")
+    root.title("Text annotator for images")
 
-    image_folder = filedialog.askdirectory(title="Chose the folder with images")
-    output_csv = filedialog.asksaveasfilename(defaultextension=".csv", filetypes=[("CSV files", "*.csv")], title="Chose CSV for saving results")
+    image_folder = filedialog.askdirectory(title="Choose the folder with images")
+    output_csv = filedialog.asksaveasfilename(defaultextension=".csv", filetypes=[("CSV files", "*.csv")], title="Choose CSV for saving results")
 
     app = TextAnnotatorApp(root, image_folder, output_csv)
     root.mainloop()

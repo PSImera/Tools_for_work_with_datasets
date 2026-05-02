@@ -42,7 +42,7 @@ def pre_markup_blocks(input_dir, output_csv):
 
     df = pd.DataFrame(results)
     df.to_csv(output_csv, index=False)
-    print(f'все блоки размечены, результаты созранены в {output_csv}')
+    print(f'все блоки размечены, результаты сохранены в {output_csv}')
 
 
 def main():

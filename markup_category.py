@@ -6,13 +6,19 @@ from PIL import Image, ImageTk
 
 
 class ImageClassifierApp:
-    ''' Application for markup classification csv file for image dataset'''
+    """Tkinter app for manually labelling an image dataset via category buttons or hotkeys.
+
+    Skips images already present in `annotated_csv` so work can be resumed
+    across sessions. Results are written incrementally to `output_csv` after
+    every annotation so no progress is lost on exit.
+    """
+
     def __init__(self, root, image_folder, categories, output_csv, annotated_csv):
         self.root = root
         self.image_folder = image_folder
         self.categories = categories
         self.output_csv = output_csv
-        
+
         # Read already annotated files from the given CSV
         self.annotated_files = set()
         if os.path.exists(annotated_csv):
@@ -39,12 +45,12 @@ class ImageClassifierApp:
         # GUI setup
         self.image_label = tk.Label(root)
         self.image_label.pack()
-        
+
         self.buttons_frame = tk.Frame(root)
         self.buttons_frame.pack()
 
         for index, category in enumerate(categories):
-            btn = tk.Button(self.buttons_frame, text=f"{index + 1}: {category}", 
+            btn = tk.Button(self.buttons_frame, text=f"{index + 1}: {category}",
                             command=lambda c=category: self.save_classification(c))
             btn.pack(side=tk.LEFT, padx=5, pady=5)
 
@@ -57,6 +63,7 @@ class ImageClassifierApp:
         self.show_image()
 
     def show_image(self):
+        """Display the current image and update the status counter."""
         if self.current_index >= len(self.image_files):
             self.status_label.config(text="All images are marked up!")
             self.image_label.config(image='')
@@ -70,6 +77,7 @@ class ImageClassifierApp:
         self.status_label.config(text=f"Images {self.current_index + 1} of {len(self.image_files)}")
 
     def save_classification(self, category):
+        """Save the chosen category for the current image and advance to the next."""
         file_name = self.image_files[self.current_index]
         self.classifications[file_name] = category
 
@@ -82,6 +90,7 @@ class ImageClassifierApp:
         self.show_image()
 
     def on_key_press(self, event):
+        """Handle numeric hotkeys 1-9 to select the corresponding category."""
         try:
             # Convert key to an integer and map it to category
             key_num = int(event.char)  # Get number key pressed
@@ -94,11 +103,11 @@ class ImageClassifierApp:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    root.title("Image Classificator")
+    root.title("Image Classifier")
 
-    image_folder = filedialog.askdirectory(title="Chose the folder with images")
-    output_csv = filedialog.asksaveasfilename(defaultextension=".csv", filetypes=[("CSV files", "*.csv")], title="Chose CSV for saving results")
-    annotated_csv = filedialog.askopenfilename(defaultextension=".csv", filetypes=[("CSV files", "*.csv")], title="Chose CSV with already marked images")
+    image_folder = filedialog.askdirectory(title="Choose the folder with images")
+    output_csv = filedialog.asksaveasfilename(defaultextension=".csv", filetypes=[("CSV files", "*.csv")], title="Choose CSV for saving results")
+    annotated_csv = filedialog.askopenfilename(defaultextension=".csv", filetypes=[("CSV files", "*.csv")], title="Choose CSV with already marked images")
 
     image_folder = 'datasets/ap'
     output_csv = 'datasets/ap_target.csv'
