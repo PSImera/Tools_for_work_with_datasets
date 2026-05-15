@@ -1,6 +1,6 @@
 # Tools for working with datasets
 
-> <a href="README-RU.MD" target="_blank">**Это описание есть на русском языке**</a>
+> <a href="README-RU.md" target="_blank">**Это описание есть на русском языке**</a>
 
 A collection of tools for building, labelling, and evaluating image datasets.  
 Used during the development of [AI-Apex-Stat-Detector-Discord-Bot](https://github.com/PSImera/AI-Apex-Stat-Detector-Discord-Bot) — a bot that reads in-game statistics from Apex Legends screenshots via OCR.

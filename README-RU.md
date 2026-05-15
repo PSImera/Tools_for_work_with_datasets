@@ -1,6 +1,6 @@
 # Tools for working with datasets
 
-> <a href="README.MD" target="_blank">**English version**</a>
+> <a href="README.md" target="_blank">**English version**</a>
 
 Набор инструментов для сборки, разметки и проверки датасетов.  
 Использовались при разработке [AI-Apex-Stat-Detector-Discord-Bot](https://github.com/PSImera/AI-Apex-Stat-Detector-Discord-Bot) — бота, который распознаёт игровую статистику из скриншотов Apex Legends через OCR.
